@@ -22,9 +22,9 @@ Diseño de la base y reglas que garantiza: @DataBase/README.md. (`ws_ligaD_front
 - `frontend-dev`: vistas Vue/Vuetify, tema, conexión con la API.
 Delegar en ellos según la capa. Para una funcionalidad completa, el orden es: db-dev → backend-dev → frontend-dev. Ningún agente hace commits.
 
-## Estado real (2026-10-18)
+## Estado real (2026-11-03)
 - Diseño visual del front cerrado (pendiente solo la imagen P04 del slide Discord). Todo funciona con datos de prueba.
-- Back: carpeta limpia con repo git (sin commits). **Diseño de la base v2 aprobado** (`DataBase/README.md`). Aún no existe `BD_LIGAD` ni el proyecto .NET. **Siguiente: fase 1 (scripts de la base); pedir permiso antes de ejecutar cualquier cosa sobre la base.**
+- Back: **fase 1 escrita** (`DataBase/scripts/`: 00 ejecuta todo · 01 base · 02 tablas · 03 catálogos · 04 SPs de catálogos), aún sin ejecutar: la corre el usuario o se ejecuta solo con su permiso. **Fase 2 (API base) hecha**: `LigaD.sln` + `LigaD.Api/` (.NET 9, `global.json` fija SDK 9.0.308), estructura MKK (Config, DTOs, Entidades, EndPoints, Filtros, Repositorios, Utilitarios, Validaciones), envoltorio `{ exitoso, mensaje, datos, errores }`, OpenAPI + Scalar (`http://localhost:5300/scalar/v1`), CORS al front (5173/5174). Endpoints: `GET /api/salud` (sin base) y `GET /api/catalogos?grupo=` (SP `PRLGD_CON_TIP_VALOR`). Conexión de desarrollo en `appsettings.Development.json` (Windows auth, sin secretos). Arranque: `cd sw_ligaD_back/LigaD.Api && dotnet run`. **Siguiente: semillas + SPs de jugador/equipo y fase 3 (Steam + JWT).**
 - Mecánica del negocio y decisiones pendientes: `General Liga D/MECANICA_DEL_NEGOCIO.md` (también publicada como artifact privado: https://claude.ai/artifact/UXTsrahvTobTTw96uwnoti).
 - Fases: 1) base (tablas, catálogos, semillas) → 2) API base → 3) login Steam + JWT → 4) torneos, equipos, inscripciones → 5) pagos Culqi, wallet, cobros → 6) conectar el front.
 

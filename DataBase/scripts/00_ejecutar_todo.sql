@@ -13,6 +13,7 @@
 :r .\01_crear_base.sql
 :r .\02_tablas.sql
 :r .\03_catalogos.sql
+:r .\04_sp_catalogos.sql
 
-PRINT 'BD_LIGAD lista: base, tablas y catálogos.';
+PRINT 'BD_LIGAD lista: base, tablas, catálogos y SPs.';
 GO
