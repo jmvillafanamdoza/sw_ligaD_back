@@ -1,12 +1,12 @@
 # Liga D
 
-> Copia del `CLAUDE.md` del espacio de trabajo `D:\AIwara\Dota\` (carpeta con `ws_ligaD_front/`, `ws_ligaD_back/` y `General Liga D/`). Para trabajar con todo el contexto, clona ambos repos dentro de una misma carpeta. La carpeta `General Liga D/` (manual, imágenes originales, prompts, mecánica del negocio) se comparte aparte, no está en git.
+> Copia del `CLAUDE.md` del espacio de trabajo `D:\AIwara\Dota\` (carpeta con `ws_ligaD_front/`, `sw_ligaD_back/` y `General Liga D/`). Para trabajar con todo el contexto, clona ambos repos dentro de una misma carpeta. La carpeta `General Liga D/` (manual, imágenes originales, prompts, mecánica del negocio) se comparte aparte, no está en git.
 
 Plataforma de torneos amateur de Dota 2 (Perú) con modelo de buy-ins y satélites tipo póker: Satélites Exprés → Battle Cups semanales → International Cup mensual. Pagos con Culqi, retiros de premios por Yape/Plin/BCP.
 
 ## Carpetas
 - `ws_ligaD_front/`: front. Vue 3 + Vite + Vuetify + vue-router. Repo git `github.com/jmvillafanamdoza/ws_ligaD_front`. `npm run dev` → http://localhost:5173. Todo funciona con datos mock (`src/data/*.mock.js`). Componentes por niveles: `components/atoms|molecules|organisms`, más `components/profile/`.
-- `ws_ligaD_back/`: back. **API .NET 9 (Minimal API + Dapper + SPs) + SQL Server**, misma arquitectura que el CRM MKK. Repo git local (rama `main`, sin remoto aún). Desarrollo: base `BD_LIGAD` en `.\SQLEXPRESS` (SQL Server 2022, autenticación de Windows). Diseño de la base: `ws_ligaD_back/DataBase/README.md` (estilo MKK: tablas `TLGD_`, SPs `PRLGD_`, IDs INT IDENTITY). El esqueleto NestJS/Prisma anterior se borró (2026-10-18).
+- `sw_ligaD_back/`: back. **API .NET 9 (Minimal API + Dapper + SPs) + SQL Server**, misma arquitectura que el CRM MKK. Repo git `github.com/jmvillafanamdoza/sw_ligaD_back` (rama `main`). Desarrollo: base `BD_LIGAD` en `.\SQLEXPRESS` (SQL Server 2022, autenticación de Windows). Diseño de la base: `sw_ligaD_back/DataBase/README.md` (estilo MKK: tablas `TLGD_`, SPs `PRLGD_`, IDs INT IDENTITY). El esqueleto NestJS/Prisma anterior se borró (2026-10-18).
 - `General Liga D/`: material general del proyecto. `Liga_D_Manual.pdf` (manual de identidad visual, 112 MB: no se puede leer directo, hay que extraer el texto con `pypdf`) y `imagenes/` (`fondo_azul_esencia.png`, `fondo_ancients.jpeg`, `imagen logo.jpg`; las del inicio público van en `imagenes/Home/`: fondo de fuego, torres del hero y portadas de torneo). Aquí va la documentación y los datos de negocio nuevos. Las imágenes que usa el front se convierten a WebP en `ws_ligaD_front/public/img/` (no se sirven los originales pesados).
 - Hay dos "inicios": `/home` es la cara comercial pública (hero con `fondo_rojo_fuego`); `/panel` es el inicio privado del jugador.
 - Logo oficial: archivos del diseñador en `General Liga D/imagenes/wetransfer_liga-d_2026-10-18_0158/` (AI, EPS, PDF, PNG; la carpeta "JPG" trae PNG 1080×1080). En el front se usa `v1_borde` (principal) y `blanco` (footer), exportados a `public/img/marca/` y referenciados solo vía `BRAND_LOGO` en `src/data/images.js`.
@@ -17,7 +17,7 @@ Plataforma de torneos amateur de Dota 2 (Perú) con modelo de buy-ins y satélit
 Diseño de la base y reglas que garantiza: @DataBase/README.md. (`ws_ligaD_front/README_ARQUITECTURA_LIGAD.md` y `ws_ligaD_front/docs/` describen el plan antiguo NestJS/Prisma: solo como referencia histórica.)
 
 ## Agentes del proyecto (`.claude/agents/`)
-- `db-dev`: SQL Server — tablas, SPs `PRLGD_*`, catálogos y datos de prueba en `ws_ligaD_back/DataBase/`.
+- `db-dev`: SQL Server — tablas, SPs `PRLGD_*`, catálogos y datos de prueba en `sw_ligaD_back/DataBase/`.
 - `backend-dev`: API .NET 9 — endpoints, repositorios Dapper, auth Steam/JWT, Culqi, wallet.
 - `frontend-dev`: vistas Vue/Vuetify, tema, conexión con la API.
 Delegar en ellos según la capa. Para una funcionalidad completa, el orden es: db-dev → backend-dev → frontend-dev. Ningún agente hace commits.
